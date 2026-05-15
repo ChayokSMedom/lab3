@@ -10,11 +10,9 @@
     #include <windows.h>
 #endif
 
-// ==================== Настройка для работы с русским языком ====================
 void setup_russian_locale() {
     setlocale(LC_ALL, "ru_RU.UTF-8");
 }
-// ==================== Шаблон класса Matrix ====================
 template<typename T>
 class Matrix {
     // Статическая проверка: T должен быть арифметическим типом
@@ -58,7 +56,6 @@ private:
     }
 
 public:
-    // ==================== Конструкторы и деструктор ====================
 
     // Конструктор по умолчанию (создает пустую матрицу 0x0)
     Matrix() : data(nullptr), rows(0), cols(0) {}
@@ -108,8 +105,6 @@ public:
         deallocate_memory();
     }
 
-    // ==================== Операторы присваивания ====================
-
     // Копирующее присваивание
     Matrix& operator=(const Matrix& other) {
         if (this != &other) {
@@ -133,7 +128,6 @@ public:
         return *this;
     }
 
-    // ==================== Доступ к элементам ====================
 
     // Не константный доступ (с проверкой границ)
     T& at(size_t row, size_t col) {
@@ -161,8 +155,6 @@ public:
         return data[row];
     }
 
-    // ==================== Методы получения информации ====================
-
     // Получение количества строк
     size_t get_rows() const {
         return rows;
@@ -182,9 +174,6 @@ public:
     bool is_square() const {
         return rows == cols;
     }
-
-    // ==================== Операторы сравнения ====================
-
     // Оператор равенства
     bool operator==(const Matrix& other) const {
         if (rows != other.rows || cols != other.cols) {
@@ -206,7 +195,6 @@ public:
         return !(*this == other);
     }
 
-    // ==================== Арифметические операторы ====================
 
     // Унарный минус
     Matrix operator-() const {
@@ -269,7 +257,6 @@ public:
         return result;
     }
 
-    // ==================== Операторы с присваиванием ====================
 
     // Сложение с присваиванием
     Matrix& operator+=(const Matrix& other) {
@@ -304,8 +291,6 @@ public:
         *this = *this * other;
         return *this;
     }
-
-    // ==================== Скалярные операции ====================
 
     // Умножение на скаляр
     Matrix operator*(const T& scalar) const {
@@ -357,7 +342,6 @@ public:
         return *this;
     }
 
-    // ==================== Методы для работы с матрицей ====================
 
     // Заполнение матрицы значением
     void fill(const T& value) {
@@ -415,7 +399,6 @@ public:
         return {column, rows};
     }
 
-    // ==================== Статические методы ====================
 
     // Создание единичной матрицы
     static Matrix identity(size_t n) {
@@ -430,8 +413,6 @@ public:
     static Matrix zero(size_t rows, size_t cols) {
         return Matrix(rows, cols, T(0));
     }
-
-    // ==================== Итераторы ====================
 
     // Простой итератор для перебора всех элементов
     class Iterator {
@@ -472,8 +453,6 @@ public:
     }
 };
 
-// ==================== Операторы друзья (для удобства) ====================
-
 // Умножение скаляра на матрицу
 template<typename T>
 Matrix<T> operator*(const T& scalar, const Matrix<T>& matrix) {
@@ -507,8 +486,6 @@ std::istream& operator>>(std::istream& is, Matrix<T>& matrix) {
     }
     return is;
 }
-
-// ==================== Функции тестирования ====================
 
 void test_constructor() {
     std::cout << "Тестирование конструкторов...\n";
@@ -650,9 +627,6 @@ void test_comparison() {
 }
 
 void run_all_tests() {
-    std::cout << "╔══════════════════════════════════════════════════════════════╗\n";
-    std::cout << "║     Лабораторная работа 3: Шаблон класса Matrix              ║\n";
-    std::cout << "╚══════════════════════════════════════════════════════════════╝\n\n";
 
     test_constructor();
     test_copy_move();
@@ -662,11 +636,10 @@ void run_all_tests() {
     test_transpose();
     test_comparison();
 
-    std::cout << "=== Все тесты пройдены успешно! ===\n\n";
 }
 
 void demonstration() {
-    std::cout << "=== Демонстрация работы с классом Matrix ===\n\n";
+    std::cout << "Демонстрация работы с классом Matrix\n\n";
 
     // Создание матриц разных типов
     Matrix<int> m1(3, 3, 5);
@@ -703,7 +676,6 @@ void demonstration() {
     std::cout << "5 * B:\n" << (5 * B) << std::endl;
 }
 
-// ==================== main ====================
 int main() {
     // Настройка русской локали
     setup_russian_locale();
